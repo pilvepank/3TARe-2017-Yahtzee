@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yahtzee 2D — 3TARe</title>
+  </head>
+  <body class="min-h-screen bg-slate-950 text-slate-100 antialiased">
+    <div id="app" class="mx-auto max-w-6xl px-4 py-6">
+      <header class="mb-6 flex flex-wrap items-center justify-between gap-4 border-b border-slate-800 pb-4">
+        <div>
+          <h1 class="text-2xl font-bold tracking-tight text-emerald-400">Yahtzee 2D</h1>
+          <p class="text-sm text-slate-400">Phaser 3 + TypeScript + Tailwind CSS port of 3TARe-2017-Yahtzee</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <select id="mode-select" class="rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-200 focus:border-emerald-500 focus:outline-none">
+            <option value="cpu">1P vs CPU</option>
+            <option value="2p">2 Players Local</option>
+            <option value="solo">Solo Practice</option>
+          </select>
+          <button id="new-game-btn" class="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-500">
+            New Game
+          </button>
+        </div>
+      </header>
+
+      <div class="grid gap-6 lg:grid-cols-12">
+        <section class="lg:col-span-7 flex flex-col gap-4">
+          <div class="flex items-center justify-between rounded-xl border border-slate-800 bg-slate-900/80 px-4 py-3">
+            <div>
+              <span class="text-xs uppercase tracking-wider text-slate-400">Active Turn</span>
+              <div id="turn-label" class="text-lg font-semibold text-white">Player 1</div>
+            </div>
+            <div class="text-right">
+              <span class="text-xs uppercase tracking-wider text-slate-400">Rolls Left</span>
+              <div id="rolls-left" class="text-lg font-bold text-amber-400">3</div>
+            </div>
+          </div>
+
+          <div id="phaser-container" class="overflow-hidden rounded-2xl border border-slate-800 bg-emerald-950 shadow-xl"></div>
+
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <p class="text-xs text-slate-400">Click any die on the table to hold/release it between rolls.</p>
+            <button id="roll-btn" class="rounded-xl bg-amber-500 px-6 py-3 text-sm font-bold text-slate-950 shadow-lg transition hover:bg-amber-400 disabled:cursor-not-allowed disabled:opacity-40">
+              Roll Dice
+            </button>
+          </div>
+          <div id="status-banner" class="hidden rounded-xl border border-emerald-500/40 bg-emerald-950/60 px-4 py-3 text-sm font-medium text-emerald-200"></div>
+        </section>
+
+        <aside class="lg:col-span-5">
+          <div class="rounded-2xl border border-slate-800 bg-slate-900/90 p-4 shadow-xl">
+            <h2 class="mb-3 text-base font-bold text-slate-100">Scorecard</h2>
+            <div id="scorecard-container" class="overflow-x-auto"></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+    <script type="module" src="/web-src/main.ts"></script>
+  </body>
+</html>
