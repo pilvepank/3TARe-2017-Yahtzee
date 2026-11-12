@@ -23,6 +23,8 @@ describe("yahtzeeRules", () => {
   it("scores full house and straights", () => {
     expect(calculateCategoryScore("FullHouse", [3, 3, 3, 2, 2])).toBe(25);
     expect(calculateCategoryScore("FullHouse", [3, 3, 2, 1, 2])).toBe(0);
+    // Five of a kind is accepted as a full house (Joker-style house rule of this implementation).
+    expect(calculateCategoryScore("FullHouse", [4, 4, 4, 4, 4])).toBe(25);
     expect(calculateCategoryScore("SmallStraight", [1, 2, 3, 4, 6])).toBe(30);
     expect(calculateCategoryScore("LongStraight", [2, 3, 4, 5, 6])).toBe(40);
     expect(calculateCategoryScore("LongStraight", [1, 2, 3, 4, 6])).toBe(0);
