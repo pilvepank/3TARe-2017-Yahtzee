@@ -18,6 +18,9 @@ public class Round implements IRound {
     private List<IDie> diceInHand;
     private IPlayer currentPlayer;
 
+    // One scanner for the whole game: a new Scanner per prompt buffers ahead and swallows the input that follows it
+    private static final Scanner IN = new Scanner(System.in).useDelimiter("\\n");
+
     public void roll(List<IDie> dice)
     {
         if (dice == null) {
@@ -61,9 +64,14 @@ public class Round implements IRound {
             }
 
             System.out.print("Enter option: ");
-            Scanner in = new Scanner(System.in);
-            in.useDelimiter("\\n");
-            int option = in.nextInt();
+            Scanner in = IN;
+            int option;
+            try {
+                option = Integer.parseInt(in.next().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter 1, 2 or 3.");
+                continue;
+            }
             switch (option) {
                 case 1:
                 case 2:
@@ -71,7 +79,12 @@ public class Round implements IRound {
                     String line = in.next();
                     String[] s = line.split(",");
                     diceLoop: for (int i = 0; i < s.length; i++) {
-                        int value = Integer.parseInt(s[i].trim());
+                        int value;
+                        try {
+                            value = Integer.parseInt(s[i].trim());
+                        } catch (NumberFormatException e) {
+                            continue; // ignore anything that is not a number
+                        }
                         if (value >= 1 && value <= 6) {
                             if (option == 1) {
                                 for (IDie die : dice) {
