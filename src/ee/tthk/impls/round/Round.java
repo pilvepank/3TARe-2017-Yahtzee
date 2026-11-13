@@ -65,6 +65,9 @@ public class Round implements IRound {
 
             System.out.print("Enter option: ");
             Scanner in = IN;
+            if (!in.hasNext()) {
+                return; // input closed: nothing more can be chosen, keep the dice as they are
+            }
             int option;
             try {
                 option = Integer.parseInt(in.next().trim());
@@ -76,7 +79,7 @@ public class Round implements IRound {
                 case 1:
                 case 2:
                     System.out.print("Choose dice to " + ((option == 1) ? "keep: " : "return: "));
-                    String line = in.next();
+                    String line = in.hasNext() ? in.next() : "";
                     String[] s = line.split(",");
                     diceLoop: for (int i = 0; i < s.length; i++) {
                         int value;
